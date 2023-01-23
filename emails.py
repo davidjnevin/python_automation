@@ -11,7 +11,7 @@ def generate_email(has_attachment=False, body="missing", subject="Subject line")
 
     message = EmailMessage()
     sender = "automation@example.com"
-    # recipient = "student-01-925a7b604c65@example.com"
+    recipient = "{}@example.com".format(os.environ["USER"])
 
     message["From"] = sender
     message["To"] = recipient
@@ -29,12 +29,13 @@ def generate_email(has_attachment=False, body="missing", subject="Subject line")
 
 
 def send_email(message):
-    mail_server = smtplib.SMTP_SSL("34.188.221.42")
+    mail_server = smtplib.SMTP("localhost")
     # print("Mailserver response: ", mail_server)
     # mail_server.set_debuglevel(1)
-    # mail_pass = "o9UTI78GkCo5"
-    mail_server.login(sender, mail_pass)
+    # mail_pass = ""
+    # mail_server.login(sender, mail_pass)
     mail_server.send_message(message)
+    mail_server.quit()
 
 
 if __name__ == "__main__":
